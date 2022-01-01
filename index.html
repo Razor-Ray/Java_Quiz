@@ -4,9 +4,24 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Java_Script</title>
+    <title>javaScript_Quiz</title>
+    <link rel="stylesheet" href="./Assets/style/style.css">
 </head>
 <body>
-    <h1>Hello World</h1>
+    <nav class = "navBar">
+        <ul>
+            <li id = highScore>View Highscores</li>
+            <li id = timer> Time: 0</li>
+        </ul>
+    </nav>
+    <section class = "container">
+        <h1 id="quizHeader">Coding Quiz Challenge</h1>
+        <p id ="quizTip"> Try to answer the following code-related questions within the time limit. Keep in mind that incorrect answers will penalize your score/time by ten seconds!</p>
+        <p id = "question"></p>
+        <ul id = "options"></ul>
+        <button id = startQuizButton>Start Quiz</button>
+        <button id = options style="display: none;"></button>
+    </section>
+    <script src="./Assets/js/script.js"></script>
 </body>
 </html>
