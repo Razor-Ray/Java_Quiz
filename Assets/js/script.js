@@ -8,15 +8,18 @@
     var startQuiz = document.querySelector("#startQuizButton")
     var questions = document.querySelector("#question")
     var questionIndex = 0
-    var sectionContainer = document.querySelector(".container #options")
+    console.log(bodySection)
+
+    var sectionContainer = document.querySelector("#options")
     var displayResult = document.querySelector("#displayResult")
-    var questionAndOptions = [
-        {question: "Commonly used data types DO NOT include:",
+    var questionAndOptions = [{
+        question: "Commonly used data types DO NOT include:",
         options: ["1. Strings","2. Booleans","3. Alerts","4. Numbers"],
         correct: "3. Alerts"},
         {question: "Functions are reusable blocks of code that perform a specific task?",
         options: ["1. True","2. False"],
-        correct: "1. True"},
+        correct: "1. True"
+        }
     ]
     var optionsEl = document.getElementById("options")
     var time = 75
@@ -26,33 +29,50 @@
         startQuiz.setAttribute("style","display: none")
         quizTip.setAttribute("style","display: none")
         quizHeader.setAttribute("style","display: none")
+        secondsRemaining()
         displayQuestion();
         generateOptions();
-        secondsRemaining();
     })
 
     sectionContainer.addEventListener("click", function(event){
         var element = event.target;
-        event.stopPropagation();
-        optionsEl.setAttribute("style","display: none")
+        var showResult = 1;
+        event.stopPropagation()
         if(element.matches("button")){
-            var selectedAnswer = element.innerText
-            var correctAnswer = questionAndOptions[questionIndex].correct
-            if(selectedAnswer == correctAnswer){
+            if(element.innerText == questionAndOptions[questionIndex].correct){
                 displayResult.textContent = "Correct!";
-                clearOldAnswers();
-                questionIndexAdd();
+                var timeResult = setInterval(function(){
+                    if(showResult<=3){
+                    showResult--;
+                }
+                if(showResult===0){
+                    clearInterval(timeResult);
+                    displayResult.textContent=""
+                }
+            },1000)
             } else{
                 displayResult.textContent = "Wrong!";
+                timeResult = setInterval(function(){
+                if(showResult<=3){
+                showResult--;
+                console.log(showResult)
+                }
+                if(showResult===0){
+                clearInterval(timeResult);
+                displayResult.textContent="";
+                }
+            },1000);
                 time = time-10;
-                clearOldAnswers()
-                questionIndexAdd()
+
             }
         }
+        clearOldAnswers()
+        questionIndexAdd()
     })
 
     var displayQuestion = function(){
         questions.textContent = questionAndOptions[questionIndex].question
+        questions.setAttribute("style","text-align: left; font-size: 30px; font-weight: bold")
     }
 
     function generateOptions(){
@@ -60,7 +80,9 @@
         for(i=0;i<questionAndOptions[questionIndex].options.length; i++){
             var optionsButtons = document.createElement("button")
             optionsButtons.textContent = questionAndOptions[questionIndex].options[i]
-            optionsEl.appendChild(optionsButtons)} 
+            optionsEl.appendChild(optionsButtons)
+            optionsButtons.setAttribute("style","display: flex; margin: 10px")
+        } 
     }
 
     function questionIndexAdd(){
@@ -80,26 +102,27 @@
     }
 
     function showHighScore(){
-        questions.textContent=""
+        questsions.textContent=""
         var divEl = document.createElement("div")
-        var viewHighScore = document.createElement("button")
-        var tryagain = document.createElement("button")
-        viewHighScore.textContent = "View Highscore"
-        tryagain.textContent = "Try Again"
-        divEl.setAttribute("class","container")
-        document.body.appendChild(divEl)
-        divEl.appendChild(viewHighScore)
-        divEl.appendChild(tryagain)
+        var h1El = document.createElement("h1")
+        var pEl = document.createElement("p")
+        h1El.textContent = "All Done!"
+        pEl.textContent = "Your final score is "
+        bodySection.appendChild(divEl)
+        divEl.appendChild(h1El)
+        divEl.appendChild(pEl)
     }
 
     function secondsRemaining(){
         var remainingTime = setInterval(function(){
+        if(time>=0){
             timer.textContent = time + " seconds remaining"
-            time--;
-        if(time === -1){
+            time--;}
+        else if(time === -1){
             clearInterval(remainingTime);
             clearOldAnswers();
             showHighScore();
         }
         },1000)
     }
+

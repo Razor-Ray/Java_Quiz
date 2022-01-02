@@ -1,6 +1,7 @@
 body{
-    font-family:'Times New Roman', Times, serif;
+
     color: black;
+    font-family:Verdana, Geneva, Tahoma, sans-serif ;
 }
 
 p{
@@ -44,7 +45,6 @@ button{
 
 #question{
     font-size: 30px;
-    font-family:Verdana, Geneva, Tahoma, sans-serif ;
 }
 
 .button{
