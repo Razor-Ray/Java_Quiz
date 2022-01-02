@@ -8,10 +8,11 @@
     var startQuiz = document.querySelector("#startQuizButton")
     var questions = document.querySelector("#question")
     var questionIndex = 0
-    console.log(bodySection)
+    var formEl = document.querySelector("#formEl")
 
     var sectionContainer = document.querySelector("#options")
     var displayResult = document.querySelector("#displayResult")
+    var displayScore = document.querySelector("#displayScore")
     var questionAndOptions = [{
         question: "Commonly used data types DO NOT include:",
         options: ["1. Strings","2. Booleans","3. Alerts","4. Numbers"],
@@ -21,6 +22,7 @@
         correct: "1. True"
         }
     ]
+    var score = 0
     var optionsEl = document.getElementById("options")
     var time = 75
     var timer = document.querySelector("#timer")
@@ -41,6 +43,7 @@
         if(element.matches("button")){
             if(element.innerText == questionAndOptions[questionIndex].correct){
                 displayResult.textContent = "Correct!";
+                score = score + 10;
                 var timeResult = setInterval(function(){
                     if(showResult<=3){
                     showResult--;
@@ -102,17 +105,19 @@
     }
 
     function showHighScore(){
-        questsions.textContent=""
+        questions.textContent=""
         var divEl = document.createElement("div")
         var h1El = document.createElement("h1")
         var pEl = document.createElement("p")
         h1El.textContent = "All Done!"
-        pEl.textContent = "Your final score is "
-        bodySection.appendChild(divEl)
-        divEl.appendChild(h1El)
-        divEl.appendChild(pEl)
+        pEl.textContent = "Your final score is "+score
+        displayScore.appendChild(divEl);
+        divEl.appendChild(formEl);
+        divEl.appendChild(h1El);
+        divEl.appendChild(pEl);
+        formEl.setAttribute("style","display:inline")
     }
-
+    
     function secondsRemaining(){
         var remainingTime = setInterval(function(){
         if(time>=0){
