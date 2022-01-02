@@ -59,12 +59,13 @@ button{
     font-size: 30px;
 }
 
-.button{
+input[type=submit] {
     margin:10px;
     color: white;
     background-color: rgb(48, 48, 102);
     border-radius: 5px;
-    font-size: 25px;
+    font-size: 30px;
+    display: flexbox;
 }
 
 #displayResult{
@@ -75,4 +76,8 @@ button{
 
 #formEl{
     display: none;
+}
+
+.bttnContainer{
+    color: blanchedalmond;
 }

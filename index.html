@@ -10,7 +10,7 @@
 <body>
     <nav class = "navBar">
         <ul>
-            <li id = highScore>View Highscores</li>
+            <li id = highScore><a href="./highscore.html">View Highscore</a></li>
             <li id = timer> Time: 0</li>
         </ul>
     </nav>
@@ -20,16 +20,15 @@
         <p id = question></p>
         <section id = options></section>
         <button id = startQuizButton>Start Quiz</button>
-        <section id = displayResult></section>
         <section id = displayScore></section>
-        <form id="formEl">
+        <form id="formEl" method="post" action="./highscore.html">
             <label for="enterInials" >Enter Initals:</label>
             <input type="text" id="initals" value="">
-            <input  type="submit" value="Submit">
+            <input type="submit" id="submit" value="Submit">
         </form>
+        <section id = displayResult></section>
 
     </section>
-
     <script src="./Assets/js/script.js"></script>
 </body>
 </html>

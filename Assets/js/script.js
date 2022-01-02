@@ -38,40 +38,35 @@
 
     sectionContainer.addEventListener("click", function(event){
         var element = event.target;
-        var showResult = 1;
+        
         event.stopPropagation()
         if(element.matches("button")){
             if(element.innerText == questionAndOptions[questionIndex].correct){
                 displayResult.textContent = "Correct!";
                 score = score + 10;
-                var timeResult = setInterval(function(){
-                    if(showResult<=3){
-                    showResult--;
-                }
-                if(showResult===0){
-                    clearInterval(timeResult);
-                    displayResult.textContent=""
-                }
-            },1000)
+                resultDelay();
             } else{
-                displayResult.textContent = "Wrong!";
-                timeResult = setInterval(function(){
-                if(showResult<=3){
-                showResult--;
-                console.log(showResult)
-                }
-                if(showResult===0){
-                clearInterval(timeResult);
-                displayResult.textContent="";
-                }
-            },1000);
                 time = time-10;
-
+                displayResult.textContent = "Wrong!";
+                resultDelay();
             }
         }
         clearOldAnswers()
         questionIndexAdd()
     })
+
+    var resultDelay = function(){
+        var showResult = 1;
+        var timeResultID = setInterval(function(){
+            if(showResult<=3){
+            showResult--;
+            }
+            if(showResult===0){
+            clearInterval(timeResultID);
+            displayResult.textContent="";
+            }
+        },1000);
+    }
 
     var displayQuestion = function(){
         questions.textContent = questionAndOptions[questionIndex].question
@@ -106,24 +101,33 @@
 
     function showHighScore(){
         questions.textContent=""
+  
         var divEl = document.createElement("div")
         var h1El = document.createElement("h1")
         var pEl = document.createElement("p")
         h1El.textContent = "All Done!"
-        pEl.textContent = "Your final score is "+score
+        var finalScore = score + time
+        pEl.textContent = "Your final score is "+(finalScore)
         displayScore.appendChild(divEl);
-        divEl.appendChild(formEl);
         divEl.appendChild(h1El);
         divEl.appendChild(pEl);
-        formEl.setAttribute("style","display:inline")
+        questionIndex=questionAndOptions.length;
+        timer.textContent = time + " seconds remaining"
+        formEl.setAttribute("style","display:inline");
+        formEl.children[2].setAttribute("style","font-size:20px")
+        console.log(formEl)
     }
     
     function secondsRemaining(){
+        
         var remainingTime = setInterval(function(){
-        if(time>=0){
+        if(time>=0 && questionIndex<questionAndOptions.length){
             timer.textContent = time + " seconds remaining"
-            time--;}
+            time--;
+        }
+            
         else if(time === -1){
+            console.log(time);
             clearInterval(remainingTime);
             clearOldAnswers();
             showHighScore();
