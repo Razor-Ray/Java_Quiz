@@ -43,11 +43,9 @@ button{
 }
 
 #question{
-    font-size: 40px;
+    font-size: 30px;
     font-family:Verdana, Geneva, Tahoma, sans-serif ;
 }
-
-
 
 .button{
     margin:10px;
@@ -55,4 +53,10 @@ button{
     background-color: rgb(48, 48, 102);
     border-radius: 5px;
     font-size: 25px;
+}
+
+#displayResult{
+    font-size: 40px;
+    color: rgb(26, 26, 122);
+    margin-bottom: 10px;
 }
