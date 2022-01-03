@@ -4,9 +4,6 @@ var storedHighScoreList = JSON.parse(localStorage.getItem("storedHighScores"))
 var count = 0
 console.log(storedHighScoreList.length)
 
-generateList();
-
-function generateList(){
 for(i=0; i<storedHighScoreList.length; i++){
     var liEl = document.createElement("li");
     count++;
@@ -18,4 +15,3 @@ for(i=0; i<storedHighScoreList.length; i++){
     localStorage.clear();
     window.location.reload()
 })
-}
