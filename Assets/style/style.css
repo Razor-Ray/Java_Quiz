@@ -81,3 +81,14 @@ input[type=submit] {
 .bttnContainer{
     color: blanchedalmond;
 }
+
+label{
+    text-align: center;
+    margin: 10px;
+}
+
+textarea{
+
+    margin-bottom: -10px;
+
+}

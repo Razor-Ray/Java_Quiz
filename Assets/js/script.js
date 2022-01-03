@@ -8,7 +8,10 @@
     var startQuiz = document.querySelector("#startQuizButton")
     var questions = document.querySelector("#question")
     var questionIndex = 0
-    var formEl = document.querySelector("#formEl")
+    var sectionEl = document.querySelector("#submitData")
+    var highScoreList = document.querySelector("highScoreList")
+    var submittedHighScores = []
+
 
     var sectionContainer = document.querySelector("#options")
     var displayResult = document.querySelector("#displayResult")
@@ -101,31 +104,48 @@
 
     function showHighScore(){
         questions.textContent=""
-  
+        var storedHighScores = JSON.parse(localStorage.getItem("storedHighScores"))
+        if(storedHighScores==!null){
+        submittedHighScores = storedHighScores}
         var divEl = document.createElement("div")
         var h1El = document.createElement("h1")
         var pEl = document.createElement("p")
+        var labelEl = document.createElement("label")
+        var textAreaEl = document.createElement("textarea")
+        var submitButton = document.createElement("button")
+        displayScore.appendChild(divEl);
+        divEl.append(h1El, pEl);
+        sectionEl.append(labelEl, textAreaEl, submitButton)
         h1El.textContent = "All Done!"
         var finalScore = score + time
         pEl.textContent = "Your final score is "+(finalScore)
-        displayScore.appendChild(divEl);
-        divEl.appendChild(h1El);
-        divEl.appendChild(pEl);
         questionIndex=questionAndOptions.length;
         timer.textContent = time + " seconds remaining"
-        formEl.setAttribute("style","display:inline");
-        formEl.children[2].setAttribute("style","font-size:20px")
-        console.log(formEl)
-    }
-    
-    function secondsRemaining(){
+        labelEl.textContent = "Enter Initals"
+        submitButton.textContent = "Submit"
         
+        sectionEl.children[2].addEventListener("click", function(){
+        var highScoreText = sectionEl.children[1].value.trim()
+        if (highScoreText ===""){
+            alert("Initals cannot be blank");
+            return;}
+        var initalAndScore = highScoreText +" "+finalScore;
+        submittedHighScores.push(initalAndScore)
+        localStorage.setItem("storedHighScores",JSON.stringify(submittedHighScores))
+        sectionEl.children[1].value = ""
+    })
+    }
+
+    function store(){
+        submittedHighScores.push(initalAndScore.value)
+    }
+
+    function secondsRemaining(){
         var remainingTime = setInterval(function(){
         if(time>=0 && questionIndex<questionAndOptions.length){
             timer.textContent = time + " seconds remaining"
             time--;
-        }
-            
+        }    
         else if(time === -1){
             console.log(time);
             clearInterval(remainingTime);
@@ -135,3 +155,11 @@
         },1000)
     }
 
+    function init(){
+        var storedHighScores = JSON.parse(localStorage.getItem("storedHighScores"))
+        if (storedHighScores !==null){
+            submittedHighScores = storedHighScores;
+        }
+        // renderStoredHighScores();
+    }
+    init();
