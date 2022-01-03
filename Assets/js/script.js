@@ -11,8 +11,6 @@
     var sectionEl = document.querySelector("#submitData")
     var highScoreList = document.querySelector("highScoreList")
     var submittedHighScores = []
-
-
     var sectionContainer = document.querySelector("#options")
     var displayResult = document.querySelector("#displayResult")
     var displayScore = document.querySelector("#displayScore")
@@ -104,9 +102,6 @@
 
     function showHighScore(){
         questions.textContent=""
-        var storedHighScores = JSON.parse(localStorage.getItem("storedHighScores"))
-        if(storedHighScores==!null){
-        submittedHighScores = storedHighScores}
         var divEl = document.createElement("div")
         var h1El = document.createElement("h1")
         var pEl = document.createElement("p")
@@ -123,21 +118,19 @@
         timer.textContent = time + " seconds remaining"
         labelEl.textContent = "Enter Initals"
         submitButton.textContent = "Submit"
-        
+        submitButton.setAttribute("onClick","window.location.href='./highscore.html';")
+
         sectionEl.children[2].addEventListener("click", function(){
-        var highScoreText = sectionEl.children[1].value.trim()
         if (highScoreText ===""){
             alert("Initals cannot be blank");
             return;}
+        var highScoreText = sectionEl.children[1].value.trim()
         var initalAndScore = highScoreText +" "+finalScore;
         submittedHighScores.push(initalAndScore)
         localStorage.setItem("storedHighScores",JSON.stringify(submittedHighScores))
         sectionEl.children[1].value = ""
-    })
-    }
 
-    function store(){
-        submittedHighScores.push(initalAndScore.value)
+    })
     }
 
     function secondsRemaining(){
@@ -160,6 +153,5 @@
         if (storedHighScores !==null){
             submittedHighScores = storedHighScores;
         }
-        // renderStoredHighScores();
     }
     init();

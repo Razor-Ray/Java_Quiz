@@ -1,21 +1,21 @@
-var highScoreList = document.querySelector("highScoreList")
+var highScoreList = document.querySelector("#highScoreList")
+var clearHighScore = document.querySelector("#clearHighScore")
+var storedHighScoreList = JSON.parse(localStorage.getItem("storedHighScores"))
+var count = 0
+console.log(storedHighScoreList.length)
 
-function init(){
-    var storedHighscores = JSON.parse(localStorage.getItem("submittedHighScores"))
-    if(storedHighscores = !null){
-        submittedHighScores = storedHighscores
-    }
-    createListForHighScore();
-}
+generateList();
 
-function createListForHighScore(){
-    for(var i = 0;i<submittedHighScores.length;i++){
-        var highscore = submittedHighScores[i];
-        
-        var li = document.createElement("li");
-        li.textContent = highscore
-        li.setAttribute("data-index",i)
-        highScoreList.appendChild(li)
-    }
+function generateList(){
+for(i=0; i<storedHighScoreList.length; i++){
+    var liEl = document.createElement("li");
+    count++;
+    liEl.textContent = count +". "+storedHighScoreList[i];
+    highScoreList.appendChild(liEl)
+    liEl.setAttribute("style","display:block;color:black;")
 }
-init()
+    clearHighScore.addEventListener("click", function(){
+    localStorage.clear();
+    window.location.reload()
+})
+}

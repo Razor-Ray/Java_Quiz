@@ -17,6 +17,12 @@ ul{
     list-style-type: none;
 }
 
+#highScoreList{
+    list-style-type:circle;
+}
+a{
+    font-size: 0px;
+}
 li{
     display: inline;
     margin-left: 0%;
