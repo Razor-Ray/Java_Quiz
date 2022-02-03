@@ -9,13 +9,31 @@ var submittedHighScores = []
 var sectionContainer = document.querySelector("#options")
 var displayResult = document.querySelector("#displayResult")
 var displayScore = document.querySelector("#displayScore")
-var questionAndOptions = [{
-    question: "Commonly used data types DO NOT include:",
-    options: ["1. Strings","2. Booleans","3. Alerts","4. Numbers"],
-    correct: "3. Alerts"},
-    {question: "Functions are reusable blocks of code that perform a specific task?",
-    options: ["1. True","2. False"],
-    correct: "1. True"
+var questionAndOptions = [
+    {
+        question: "Commonly used data types DO NOT include:",
+        options: ["1. Strings","2. Booleans","3. Alerts","4. Numbers"],
+        correct: "3. Alerts"
+    },
+    {
+        question: "Functions are reusable blocks of code that perform a specific task?",
+        options: ["1. True","2. False"],
+        correct: "1. True"
+    },
+    {
+        question: "What is a correct syntax to output 'Hello World' in Java?",
+        options: ["1. print('hello world')","2. Console.WriteLine('Hello World')","3. System.out.println('Hello World')"],
+        correct: "3. System.out.println('Hello World')"
+    },
+    {
+        question: "Java is short for 'Javascript'",
+        options: ["1. True","2. False"],
+        correct: "1. False"
+    },
+    {
+        question: "Which data type is used to create a variable that should store text?",
+        options: ["1. String","2. myString"],
+        correct: "1. String"
     }]
 var score = 0
 var optionsEl = document.getElementById("options")
